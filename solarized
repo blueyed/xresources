@@ -1,7 +1,25 @@
 ! Solarized color scheme for the X Window System
 !
 ! http://ethanschoonover.com/solarized
+!
+! To choose between light/dark background, you have two options:
+!
+! 1: Hardcode your choice in your .Xresources file by adding either
+!      #define SOLARIZED_DARK
+!      or
+!      #define SOLARIZED_LIGHT
+!    above where you pasted the contents of this file.
+!
+! 2: Define either of those symbols when loading your .Xresources with
+!    xrdb, like so:
+!      xrdb -DSOLARIZED_LIGHT -merge ~/.Xresources
 
+! Default to dark background if neither constant is defined, or if both are.
+#if !defined(SOLARIZED_LIGHT) && !defined(SOLARIZED_DARK)
+#define SOLARIZED_DARK
+#elif defined(SOLARIZED_LIGHT) && defined(SOLARIZED_DARK)
+#undef SOLARIZED_LIGHT
+#endif
 
 ! Common
 
@@ -16,27 +34,29 @@
 
 
 ! Dark
-
-#define S_base03        #002b36
-#define S_base02        #073642
-#define S_base01        #586e75
-#define S_base00        #657b83
-#define S_base0         #839496
-#define S_base1         #93a1a1
-#define S_base2         #eee8d5
-#define S_base3         #fdf6e3
+#ifdef SOLARIZED_DARK
+  #define S_base03        #002b36
+  #define S_base02        #073642
+  #define S_base01        #586e75
+  #define S_base00        #657b83
+  #define S_base0         #839496
+  #define S_base1         #93a1a1
+  #define S_base2         #eee8d5
+  #define S_base3         #fdf6e3
+#endif
 
 
 ! Light
-
-! #define S_base03        #fdf6e3
-! #define S_base02        #eee8d5
-! #define S_base01        #93a1a1
-! #define S_base00        #839496
-! #define S_base0         #657b83
-! #define S_base1         #586e75
-! #define S_base2         #073642
-! #define S_base3         #002b36
+#ifdef SOLARIZED_LIGHT
+  #define S_base03        #fdf6e3
+  #define S_base02        #eee8d5
+  #define S_base01        #93a1a1
+  #define S_base00        #839496
+  #define S_base0         #657b83
+  #define S_base1         #586e75
+  #define S_base2         #073642
+  #define S_base3         #002b36
+#endif
 
 
 ! To only apply colors to your terminal, for example, prefix
